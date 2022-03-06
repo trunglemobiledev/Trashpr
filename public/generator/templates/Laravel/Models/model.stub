@@ -1,0 +1,26 @@
+<?php
+/**
+ * Created by: Tanmnt
+ * Email: maingocthanhtan96@gmail.com
+ * Date Time: {{DATE}}
+ * File: {{MODEL_CLASS}}.php
+ */
+namespace App\Models;
+
+//{{USE_CLASS_NOT_DELETE_THIS_LINE}}
+
+class {{MODEL_CLASS}} extends BaseModel
+{
+	//{{USE_NOT_DELETE_THIS_LINE}}
+
+    //Declare table name
+    protected $table = '{{TABLE_NAME}}';
+    //{{TIMESTAMPS_NOT_DELETE_THIS_LINE}}
+    protected $fillable = [
+    	{{FIELDS}}
+    ];
+
+    {{CATS}}
+
+	//{{RELATIONS_NOT_DELETE_THIS_LINE}}
+}

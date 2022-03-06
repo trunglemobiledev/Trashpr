@@ -1,0 +1,61 @@
+/**
+ * Created by: Tanmnt
+ * Email: maingocthanhan96@gmail.com
+ * Date Time: {{$DATE$}}
+ * File: {{$NAME_ROUTE_MODEL_CLASS$}}.js
+ */
+
+import { superAdmin } from '@/settings';
+
+const {{$NAME_CONST$}} = {
+  path: '/{{$PATH_ROUTE_MODEL_CLASS$}}',
+  component: () => import('@/layout'),
+  meta: {
+    title: '{{$TITLE_ROUTE_MODEL_CLASS$}}',
+    icon: 'menu',
+    {{$ADMIN_ROLE$}}
+  },
+  children: [
+    {
+      path: '/{{$PATH_ROUTE_MODEL_CLASS$}}',
+      name: '{{$NAME_ROUTE_MODEL_CLASS$}}',
+      component: () => import('@/views/{{$MODEL_CLASS$}}'),
+      meta: {
+        title: '{{$TITLE_ROUTE_MODEL_CLASS$}}',
+        icon: 'list',
+        activeMenu: '/{{$PATH_ROUTE_MODEL_CLASS$}}',
+      },
+      hidden: true,
+    },
+    {
+      path: 'create',
+      name: '{{$NAME_ROUTE_MODEL_CLASS$}}Create',
+      hidden: true,
+      component: () => import('@/views/{{$MODEL_CLASS$}}/Form'),
+      meta: {
+        activeMenu: '/{{$PATH_ROUTE_MODEL_CLASS$}}',
+        title: '{{$TITLE_ROUTE_MODEL_CLASS$}}_create',
+        icon: 'record_create',
+      },
+    },
+    {
+      path: 'edit/:id(\\d+)',
+      name: '{{$NAME_ROUTE_MODEL_CLASS$}}Edit',
+      hidden: true,
+      component: () => import('@/views/{{$MODEL_CLASS$}}/Form'),
+      meta: {
+        activeMenu: '/{{$PATH_ROUTE_MODEL_CLASS$}}',
+        title: '{{$TITLE_ROUTE_MODEL_CLASS$}}_edit',
+        icon: 'edit',
+      },
+      props: route => {
+        return {
+          ...route,
+          props: true,
+        };
+      },
+    },
+  ],
+};
+
+export default {{$NAME_CONST$}};

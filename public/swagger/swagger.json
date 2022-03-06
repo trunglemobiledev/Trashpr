@@ -1,0 +1,516 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Manage API",
+        "description": "Documents Api",
+        "contact": {
+            "email": "maingocthanhtan96@gmail.com"
+        },
+        "license": {
+            "name": "Go to homepage",
+            "url": "/"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://larajs-2.dev.local/api/v1",
+            "description": "Api v1"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "example@larajs.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login Success!"
+                    }
+                }
+            }
+        },
+        "/user-info": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Info user",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "List User",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create User",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "tanmnt"
+                                    },
+                                    "email": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "tanmnt@larajs.com"
+                                    },
+                                    "avatar": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "/images/logo-tanmnt.png"
+                                    },
+                                    "role_id": {
+                                        "description": "",
+                                        "type": "number",
+                                        "example": "2"
+                                    },
+                                    "password": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "secret"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Find User",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update User",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "tanmnt"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "tanmnt@larajs.com"
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": "/images/logo-tanmnt.png"
+                                    },
+                                    "role_id": {
+                                        "type": "number",
+                                        "example": "2"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "secret"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete User",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Role": {
+                "title": "Role",
+                "description": "Table[roles]",
+                "required": [
+                    "name",
+                    "guard_name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "AUTO_INCREMENT"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "None"
+                    },
+                    "guard_name": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "None"
+                    },
+                    "description": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "None"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "Table[users]",
+                "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "password",
+                    "role_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "AUTO_INCREMENT"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "None"
+                    },
+                    "email": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "None"
+                    },
+                    "avatar": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "None"
+                    },
+                    "role_id": {
+                        "$ref": "#/components/schemas/Role"
+                    },
+                    "password": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "None"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "deleted_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "OK": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "string",
+                                    "example": "true"
+                                },
+                                "data": {
+                                    "type": "string",
+                                    "example": "[]"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "string",
+                                    "example": "false"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "404 not found"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "Error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "string",
+                                    "example": "false"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Error server"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "ID",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        },
+        "securitySchemes": {
+            "authApi": {
+                "type": "http",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

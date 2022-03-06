@@ -1,0 +1,62 @@
+image: registry.gitlab.com/ot6/avatarr:latest
+
+#services:
+#  - mysql:5.7
+
+# Helper function to setup private key to ssh to server
+.init_opensshclient: &init_opensshclient |
+  eval $(ssh-agent -s)
+  ssh-add <(echo "$SSH_PRIVATE_KEY")
+  mkdir -p ~/.ssh
+  '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+variables:
+  MYSQL_DATABASE: homestead
+  MYSQL_ROOT_PASSWORD: secret
+  DB_HOST: mysql
+  DB_USERNAME: root
+
+stages:
+  - test
+  - dev
+  - staging
+
+unit_test:
+  stage: test
+  script:
+    - cp .env.example .env
+#    - composer install --ignore-platform-reqs --no-dev --optimize-autoloader --no-ansi --no-interaction --no-progress
+#    - php artisan key:generate
+#    - php artisan migrate
+#    - vendor/bin/phpunit
+
+deploy_dev:
+  stage: dev
+  script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" > /tmp/id_rsa && chmod 400 /tmp/id_rsa && ssh-add /tmp/id_rsa && mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - composer global require --prefer-dist laravel/envoy=~2.0 --no-interaction --prefer-dist --quiet
+    - /tmp/vendor/bin/envoy run deploy --commit="$CI_COMMIT_SHA" --branch=dev
+  environment:
+    name: DEV
+    url: https://dev.avatarr.io
+  when: on_success
+  only:
+    - dev
+
+deploy_staging:
+  image: composer:latest
+  stage: staging
+  script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" > /tmp/id_rsa && chmod 400 /tmp/id_rsa && ssh-add /tmp/id_rsa && mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - composer global require --prefer-dist laravel/envoy=~2.0 --no-interaction --prefer-dist --quiet
+    - /tmp/vendor/bin/envoy run deploy --commit="$CI_COMMIT_SHA" --branch=uat
+  environment:
+    name: STAGING
+    url: https://uat.avatarr.io
+  when: on_success
+  only:
+    - uat

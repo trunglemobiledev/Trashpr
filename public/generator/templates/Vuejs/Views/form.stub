@@ -1,0 +1,151 @@
+<template>
+  <el-row>
+    <el-col :span="24">
+      <el-card>
+        <div slot="header">
+          <template v-if="$route.params.id">
+            {{ $t('route.{{$LANG_MODEL_CLASS$}}_edit') }}
+          </template>
+          <template v-else>
+            {{ $t('route.{{$LANG_MODEL_CLASS$}}_create') }}
+          </template>
+        </div>
+        <el-form ref="{{$REF_MODEL_CLASS$}}" v-loading="loading.form" :model="form" :rules="rules" label-position="top">
+        <!--{{$FROM_ITEM_NOT_DELETE_THIS_LINE$}}-->
+          <el-form-item class="tw-flex tw-justify-end">
+            <router-link v-slot="{ href, navigate }" :to="{ name: '{{$MODEL_CLASS$}}' }" custom>
+              <a :href="href" class="el-button el-button--info is-plain" @click="navigate">{{ $t('button.cancel') }}</a>
+            </router-link>
+            <template v-if="$route.params.id">
+              <el-button
+                :loading="loading.button"
+                type="primary"
+                icon="el-icon-edit"
+                @click="() => update('{{$REF_MODEL_CLASS$}}')"
+              >
+                {{ $t('button.update') }}
+              </el-button>
+            </template>
+            <template v-else>
+              <el-button
+                :loading="loading.button"
+                type="success"
+                icon="el-icon-plus"
+                @click="() => store('{{$REF_MODEL_CLASS$}}')"
+              >
+                {{ $t('button.create') }}
+              </el-button>
+            </template>
+          </el-form-item>
+        </el-form>
+      </el-card>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+import GlobalForm from '@/plugins/mixins/global-form';
+import {{$MODEL_CLASS$}}Resource from '@/api/{{$API_VERSION$}}/{{$NAME_API}}';
+// {{$IMPORT_COMPONENT_NOT_DELETE_THIS_LINE$}}
+
+const {{$CONST_MODEL_CLASS$}}Resource = new {{$MODEL_CLASS$}}Resource();
+
+export default {
+  components: {
+    // {{$IMPORT_COMPONENT_NAME_NOT_DELETE_THIS_LINE$}}
+  },
+  mixins: [GlobalForm],
+  data() {
+    return {
+      form: {
+        // {{$FORM_FIELDS_NOT_DELETE_THIS_LINE$}}
+      }, // {{$$}}
+      loading: {
+        form: false,
+        button: false,
+      },
+      // {{$DATA_NOT_DELETE_THIS_LINE$}}
+    };
+  },
+  async created() {
+    try {
+      this.loading.form = true;
+      const { id } = this.$route.params;
+      // {{$CREATED_NOT_DELETE_THIS_LINE$}}
+      if (id) {
+        const {
+          data: { data: {{$CONST_MODEL_CLASS$}} },
+        } = await {{$CONST_MODEL_CLASS$}}Resource.get(id);
+        this.form = {{$CONST_MODEL_CLASS$}};
+      }
+      this.loading.form = false;
+    } catch (e) {
+      this.loading.form = false;
+    }
+  },
+  computed: {
+    // not rename rules
+    rules() {
+      return {
+        // {{$RULES_NOT_DELETE_THIS_LINE$}}
+      };
+    },
+  },
+  methods: {
+    store({{$REF_MODEL_CLASS$}}) {
+      this.$refs[{{$REF_MODEL_CLASS$}}].validate((valid, errors) => {
+        if (this.scrollToError(valid, errors)) {
+          return;
+        }
+        this.$confirm(this.$t('common.popup.create'), {
+          confirmButtonText: this.$t('button.create'),
+          cancelButtonText: this.$t('button.cancel'),
+          type: 'warning',
+          center: true,
+        }).then(async () => {
+          try {
+            this.loading.button = true;
+            await {{$CONST_MODEL_CLASS$}}Resource.store(this.form);
+            this.$message({
+              showClose: true,
+              message: this.$t('messages.create'),
+              type: 'success',
+            });
+            this.loading.button = false;
+            await this.$router.push({ name: '{{$NAME_ROUTE$}}' });
+          } catch(e) {
+            this.loading.button = false;
+          }
+        });
+      });
+    },
+    update({{$REF_MODEL_CLASS$}}) {
+      this.$refs[{{$REF_MODEL_CLASS$}}].validate((valid, errors) => {
+        if (this.scrollToError(valid, errors)) {
+          return;
+        }
+        this.$confirm(this.$t('common.popup.update'), {
+          confirmButtonText: this.$t('button.update'),
+          cancelButtonText: this.$t('button.cancel'),
+          type: 'warning',
+          center: true,
+        }).then(async () => {
+          try {
+            this.loading.button = true;
+            await {{$CONST_MODEL_CLASS$}}Resource.update(this.$route.params.id, this.form);
+            this.$message({
+              showClose: true,
+              message: this.$t('messages.update'),
+              type: 'success',
+            });
+            this.loading.button = false;
+            await this.$router.push({ name: '{{$NAME_ROUTE$}}' });
+          } catch (e) {
+            this.loading.button = false;
+          }
+        });
+      });
+    },
+  },
+};
+</script>

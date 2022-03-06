@@ -1,0 +1,18 @@
+<el-form-item
+          data-generator="{{$FORM_FIELD$}}"
+          :label="{{$LABEL_NAME_INPUT$}}"
+          {{$PROP_NAME$}}
+          :error="errors.{{$FORM_FIELD$}} && errors.{{$FORM_FIELD$}}[0]"
+          >
+           <el-tooltip
+             :content="form.{{$FORM_FIELD$}} === 0 ? 'OFF' : 'ON'"
+             placement="top"
+           >
+             <el-switch
+               name="{{$FORM_FIELD$}}"
+               v-model="form.{{$FORM_FIELD$}}"
+               :active-value="1"
+               :inactive-value="0"
+             />
+           </el-tooltip>
+          </el-form-item>

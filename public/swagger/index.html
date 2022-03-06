@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Api - LaraJS</title>
+    <link rel="stylesheet" type="text/css" href="./swagger-ui.css">
+    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16"/>
+    <style>
+        html {
+            box-sizing: border-box;
+            overflow: -moz-scrollbars-vertical;
+            overflow-y: scroll;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            background: #fafafa;
+        }
+
+        .topbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div id="swagger-ui"></div>
+
+<script>
+  const PERMISSION_DEVELOP = 'develop';
+  const PERMISSION_ROLE = 'admin';
+  fetch('/api/user-info', {
+    method: 'get',
+    headers: new Headers({
+      'Authorization': 'Bearer ' + getCookie('token'),
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }),
+  }).then(res => res.json())
+    .then(res => {
+      if(!res.success) {
+        return false;
+      }
+      const permissions = res.data.permissions;
+      const roles = res.data.roles;
+      const checkPermission = permissions.some(val => val === PERMISSION_DEVELOP);
+      const checkRoles = roles.some(val => val === PERMISSION_ROLE);
+      if (!checkPermission && !checkRoles) {
+        document.location.href = "/";
+      }
+    });
+
+  function getCookie(name) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+</script>
+<script src="./swagger-ui-bundle.js"></script>
+<script src="./swagger-ui-standalone-preset.js"></script>
+<script>
+  window.onload = function () {
+    // Begin Swagger UI call region
+    const ui = SwaggerUIBundle({
+      url: "swagger.json",
+      dom_id: '#swagger-ui',
+      deepLinking: true,
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ],
+      plugins: [
+        SwaggerUIBundle.plugins.DownloadUrl
+      ],
+      layout: "StandaloneLayout",
+      tagsSorter: 'alpha',
+      filter: true,
+      // requestInterceptor: (req) => {
+      //   req.headers.Authorization = 'Bearer ' + getCookie('token');
+      //   return req;
+      // },
+      onComplete: function () {
+        // Here, "basicAuth" and "apiKey" are the security scheme names/keys in the "securityDefinitions" collection
+        const token = getCookie('token') || false;
+        if(token) {
+          ui.preauthorizeApiKey("authApi", token);
+        }
+      }
+    });
+    // End Swagger UI call region
+    window.ui = ui;
+  };
+</script>
+</body>
+</html>

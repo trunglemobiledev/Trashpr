@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Created by: Tanmnt
+ * Email: maingocthanhtan96@gmail.com
+ * Date Time: {{DATE}}
+ * File: {{MODEL_CLASS}}.php
+ */
+
+namespace App\Repositories\{{MODEL_CLASS}};
+
+use App\Models\{{MODEL_CLASS}};
+use App\Repositories\EloquentRepository;
+
+class {{MODEL_CLASS}}Repository extends EloquentRepository implements {{MODEL_CLASS}}Interface
+{
+	public function getModel(): string
+	{
+		return {{MODEL_CLASS}}::class;
+	}
+}

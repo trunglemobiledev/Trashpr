@@ -1,0 +1,4 @@
+const {
+        data: { data: {{$MODEL$}} },
+      } = await {{$MODEL$}}Resource.get{{$MODEL_UPPERCASE$}}()
+      this.{{$MODEL_RELATIONSHIP$}}List = {{$MODEL$}};

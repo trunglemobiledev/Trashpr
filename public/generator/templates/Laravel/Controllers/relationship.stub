@@ -1,0 +1,14 @@
+/**
+     * get all data from {{MODEL_RELATIONSHIP}}
+     * @return JsonResponse
+     */
+    public function get{{MODEL_RELATIONSHIP}}(): JsonResponse
+    {
+        try {
+            ${{PARAM_MODEL_RELATIONSHIP}} = {{MODEL_RELATIONSHIP}}::all();
+
+            return $this->jsonData(${{PARAM_MODEL_RELATIONSHIP}});
+        } catch (\Exception $e) {
+            return $this->jsonError($e);
+        }
+    }
