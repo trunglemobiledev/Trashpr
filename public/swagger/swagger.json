@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://larajs-2.dev.local/api/v1",
+            "url": "http://localhost:8000/api/v1",
             "description": "Api v1"
         }
     ],
@@ -330,6 +330,1839 @@
                     }
                 ]
             }
+        },
+        "/danh-mucs": {
+            "get": {
+                "tags": [
+                    "danhMuc"
+                ],
+                "summary": "List danhMuc",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "danhMuc"
+                ],
+                "summary": "Create danhMuc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ten_danh_muc": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Andreane Langosh"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Mr. Korey Nienow"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/danh-mucs/{id}": {
+            "get": {
+                "tags": [
+                    "danhMuc"
+                ],
+                "summary": "Edit danhMuc",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "danhMuc"
+                ],
+                "summary": "Update danhMuc",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ten_danh_muc": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Andreane Langosh"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Mr. Korey Nienow"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "danhMuc"
+                ],
+                "summary": "Delete danhMuc",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/khos": {
+            "get": {
+                "tags": [
+                    "kho"
+                ],
+                "summary": "List kho",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "kho"
+                ],
+                "summary": "Create kho",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ten_kho": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Elva Baumbach"
+                                    },
+                                    "dia_chi": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Devante Osinski"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Bridget Bosco"
+                                    },
+                                    "ma_kho": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Janice Paucek V"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/khos/{id}": {
+            "get": {
+                "tags": [
+                    "kho"
+                ],
+                "summary": "Edit kho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "kho"
+                ],
+                "summary": "Update kho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ten_kho": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Elva Baumbach"
+                                    },
+                                    "dia_chi": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Devante Osinski"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Bridget Bosco"
+                                    },
+                                    "ma_kho": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Janice Paucek V"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "kho"
+                ],
+                "summary": "Delete kho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/nhac-cung-caps": {
+            "get": {
+                "tags": [
+                    "nhacCungCap"
+                ],
+                "summary": "List nhacCungCap",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "nhacCungCap"
+                ],
+                "summary": "Create nhacCungCap",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "man_nha_cung_cap": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Pasquale Upton"
+                                    },
+                                    "ten_nhac_cung_cap": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Timmy Heaney"
+                                    },
+                                    "dia_chi": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Jasmin Ortiz"
+                                    },
+                                    "so_dien_thoai": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Esther Krajcik Sr."
+                                    },
+                                    "tk_ngan_hang": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Pinkie Monahan II"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/nhac-cung-caps/{id}": {
+            "get": {
+                "tags": [
+                    "nhacCungCap"
+                ],
+                "summary": "Edit nhacCungCap",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "nhacCungCap"
+                ],
+                "summary": "Update nhacCungCap",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "man_nha_cung_cap": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Pasquale Upton"
+                                    },
+                                    "ten_nhac_cung_cap": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Timmy Heaney"
+                                    },
+                                    "dia_chi": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Jasmin Ortiz"
+                                    },
+                                    "so_dien_thoai": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Esther Krajcik Sr."
+                                    },
+                                    "tk_ngan_hang": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Pinkie Monahan II"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "nhacCungCap"
+                ],
+                "summary": "Delete nhacCungCap",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/nhap-khos": {
+            "get": {
+                "tags": [
+                    "nhapKho"
+                ],
+                "summary": "List nhapKho",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "nhapKho"
+                ],
+                "summary": "Create nhapKho",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ngay_nhap": {
+                                        "description": "",
+                                        "type": "DATETIME",
+                                        "default": "NULL",
+                                        "example": "2022-03-08 00:10:12"
+                                    },
+                                    "so_luong": {
+                                        "description": "",
+                                        "type": "INT",
+                                        "default": "NULL",
+                                        "example": "4352"
+                                    },
+                                    "ma_phieu_nhap": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Belle Torphy"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/nhap-khos/{id}": {
+            "get": {
+                "tags": [
+                    "nhapKho"
+                ],
+                "summary": "Edit nhapKho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "nhapKho"
+                ],
+                "summary": "Update nhapKho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ngay_nhap": {
+                                        "description": "",
+                                        "type": "DATETIME",
+                                        "default": "NULL",
+                                        "example": "2022-03-08 00:10:12"
+                                    },
+                                    "so_luong": {
+                                        "description": "",
+                                        "type": "INT",
+                                        "default": "NULL",
+                                        "example": "4352"
+                                    },
+                                    "ma_phieu_nhap": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Belle Torphy"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "nhapKho"
+                ],
+                "summary": "Delete nhapKho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/sanphams": {
+            "get": {
+                "tags": [
+                    "sanpham"
+                ],
+                "summary": "List sanpham",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "sanpham"
+                ],
+                "summary": "Create sanpham",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "danh_muc_id",
+                                    "thuong_hieu_id",
+                                    "nhac_cung_cap_id"
+                                ],
+                                "properties": {
+                                    "ma_san_pham": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Dianna Mueller"
+                                    },
+                                    "ten_san_pham": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Prof. Nicklaus Kling I"
+                                    },
+                                    "gia_nhap": {
+                                        "description": "",
+                                        "type": "FLOAT",
+                                        "default": "0",
+                                        "example": "6975.45"
+                                    },
+                                    "gia_ban": {
+                                        "description": "",
+                                        "type": "FLOAT",
+                                        "default": "0",
+                                        "example": "1639.45"
+                                    },
+                                    "ten_khach_ban": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Shannon Blick"
+                                    },
+                                    "so_dien_thoai_khach_ban": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Johnathon Schoen MD"
+                                    },
+                                    "hinh_anh": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Seamus Cormier IV"
+                                    },
+                                    "so_may": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Mrs. Lyla Schuppe"
+                                    },
+                                    "don_vi_tinh": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Mr. Javier Ruecker I"
+                                    },
+                                    "tinh_trang_bao_hanh": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Zora Corkery"
+                                    },
+                                    "ho_so": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Emma Buckridge"
+                                    },
+                                    "ngay_mua": {
+                                        "description": "",
+                                        "type": "DATETIME",
+                                        "default": "NULL",
+                                        "example": "2022-03-07 23:55:29"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "LONGTEXT",
+                                        "default": "NULL",
+                                        "example": "Voluptatem rem alias nemo et beatae. Magni laudantium quo commodi optio est repellendus voluptate. Voluptates consequuntur et modi possimus in ut. Reprehenderit sed magnam iusto maxime."
+                                    },
+                                    "danh_muc_id": {
+                                        "description": "hasMany",
+                                        "type": "BIGINT",
+                                        "default": "NONE",
+                                        "example": "1"
+                                    },
+                                    "thuong_hieu_id": {
+                                        "description": "hasMany",
+                                        "type": "BIGINT",
+                                        "default": "NONE",
+                                        "example": "1"
+                                    },
+                                    "nhac_cung_cap_id": {
+                                        "description": "hasMany",
+                                        "type": "BIGINT",
+                                        "default": "NONE",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/sanphams/{id}": {
+            "get": {
+                "tags": [
+                    "sanpham"
+                ],
+                "summary": "Edit sanpham",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "sanpham"
+                ],
+                "summary": "Update sanpham",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "danh_muc_id",
+                                    "thuong_hieu_id",
+                                    "nhac_cung_cap_id"
+                                ],
+                                "properties": {
+                                    "ma_san_pham": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Dianna Mueller"
+                                    },
+                                    "ten_san_pham": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Prof. Nicklaus Kling I"
+                                    },
+                                    "gia_nhap": {
+                                        "description": "",
+                                        "type": "FLOAT",
+                                        "default": "0",
+                                        "example": "6975.45"
+                                    },
+                                    "gia_ban": {
+                                        "description": "",
+                                        "type": "FLOAT",
+                                        "default": "0",
+                                        "example": "1639.45"
+                                    },
+                                    "ten_khach_ban": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Shannon Blick"
+                                    },
+                                    "so_dien_thoai_khach_ban": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Johnathon Schoen MD"
+                                    },
+                                    "hinh_anh": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Seamus Cormier IV"
+                                    },
+                                    "so_may": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Mrs. Lyla Schuppe"
+                                    },
+                                    "don_vi_tinh": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Mr. Javier Ruecker I"
+                                    },
+                                    "tinh_trang_bao_hanh": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Zora Corkery"
+                                    },
+                                    "ho_so": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Emma Buckridge"
+                                    },
+                                    "ngay_mua": {
+                                        "description": "",
+                                        "type": "DATETIME",
+                                        "default": "NULL",
+                                        "example": "2022-03-07 23:55:29"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "LONGTEXT",
+                                        "default": "NULL",
+                                        "example": "Voluptatem rem alias nemo et beatae. Magni laudantium quo commodi optio est repellendus voluptate. Voluptates consequuntur et modi possimus in ut. Reprehenderit sed magnam iusto maxime."
+                                    },
+                                    "danh_muc_id": {
+                                        "description": "hasMany",
+                                        "type": "BIGINT",
+                                        "default": "NONE",
+                                        "example": "1"
+                                    },
+                                    "thuong_hieu_id": {
+                                        "description": "hasMany",
+                                        "type": "BIGINT",
+                                        "default": "NONE",
+                                        "example": "1"
+                                    },
+                                    "nhac_cung_cap_id": {
+                                        "description": "hasMany",
+                                        "type": "BIGINT",
+                                        "default": "NONE",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "sanpham"
+                ],
+                "summary": "Delete sanpham",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/thuong-hieus": {
+            "get": {
+                "tags": [
+                    "thuongHieu"
+                ],
+                "summary": "List thuongHieu",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "thuongHieu"
+                ],
+                "summary": "Create thuongHieu",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ten_hang": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Rosalinda Wilkinson"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Burnice McGlynn"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/thuong-hieus/{id}": {
+            "get": {
+                "tags": [
+                    "thuongHieu"
+                ],
+                "summary": "Edit thuongHieu",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "thuongHieu"
+                ],
+                "summary": "Update thuongHieu",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ten_hang": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Rosalinda Wilkinson"
+                                    },
+                                    "mo_ta": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Burnice McGlynn"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "thuongHieu"
+                ],
+                "summary": "Delete thuongHieu",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/xuat-khos": {
+            "get": {
+                "tags": [
+                    "xuatKho"
+                ],
+                "summary": "List xuatKho",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "ascending",
+                        "in": "query",
+                        "description": "0: asc, 1: desc",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "column order by",
+                        "schema": {
+                            "type": "string",
+                            "default": "updated_at"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "xuatKho"
+                ],
+                "summary": "Create xuatKho",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ma_phieu_xuat": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Amir Jacobson II"
+                                    },
+                                    "ngay_xuat": {
+                                        "description": "",
+                                        "type": "DATETIME",
+                                        "default": "NULL",
+                                        "example": "2022-03-08 00:15:37"
+                                    },
+                                    "so_luong": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Prof. Roxane Durgan IV"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
+        },
+        "/xuat-khos/{id}": {
+            "get": {
+                "tags": [
+                    "xuatKho"
+                ],
+                "summary": "Edit xuatKho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "xuatKho"
+                ],
+                "summary": "Update xuatKho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "ma_phieu_xuat": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Amir Jacobson II"
+                                    },
+                                    "ngay_xuat": {
+                                        "description": "",
+                                        "type": "DATETIME",
+                                        "default": "NULL",
+                                        "example": "2022-03-08 00:15:37"
+                                    },
+                                    "so_luong": {
+                                        "description": "",
+                                        "type": "VARCHAR",
+                                        "default": "NULL",
+                                        "example": "Prof. Roxane Durgan IV"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "xuatKho"
+                ],
+                "summary": "Delete xuatKho",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/OK"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "security": [
+                    {
+                        "authApi": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -423,6 +2256,339 @@
                         "default": "NULL"
                     },
                     "deleted_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "danhMuc": {
+                "title": "danhMuc",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "AUTO_INCREMENT",
+                        "type": "BIGINT"
+                    },
+                    "ten_danh_muc": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "mo_ta": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "kho": {
+                "title": "kho",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "AUTO_INCREMENT",
+                        "type": "BIGINT"
+                    },
+                    "ten_kho": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "dia_chi": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "mo_ta": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "ma_kho": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "nhacCungCap": {
+                "title": "nhacCungCap",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "AUTO_INCREMENT",
+                        "type": "BIGINT"
+                    },
+                    "man_nha_cung_cap": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "ten_nhac_cung_cap": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "dia_chi": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "so_dien_thoai": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "tk_ngan_hang": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "nhapKho": {
+                "title": "nhapKho",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "AUTO_INCREMENT",
+                        "type": "BIGINT"
+                    },
+                    "ngay_nhap": {
+                        "description": "",
+                        "type": "DATETIME",
+                        "default": "NULL"
+                    },
+                    "so_luong": {
+                        "description": "",
+                        "type": "INT",
+                        "default": "NULL"
+                    },
+                    "ma_phieu_nhap": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "sanpham": {
+                "title": "sanpham",
+                "required": [
+                    "id",
+                    "danh_muc_id",
+                    "thuong_hieu_id",
+                    "nhac_cung_cap_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "AUTO_INCREMENT",
+                        "type": "BIGINT"
+                    },
+                    "ma_san_pham": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "ten_san_pham": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "gia_nhap": {
+                        "description": "",
+                        "type": "FLOAT",
+                        "default": "0"
+                    },
+                    "gia_ban": {
+                        "description": "",
+                        "type": "FLOAT",
+                        "default": "0"
+                    },
+                    "ten_khach_ban": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "so_dien_thoai_khach_ban": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "hinh_anh": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "so_may": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "don_vi_tinh": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "tinh_trang_bao_hanh": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "ho_so": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "ngay_mua": {
+                        "description": "",
+                        "type": "DATETIME",
+                        "default": "NULL"
+                    },
+                    "mo_ta": {
+                        "description": "",
+                        "type": "LONGTEXT",
+                        "default": "NULL"
+                    },
+                    "danh_muc_id": {
+                        "$ref": "#/components/schemas/danhMuc"
+                    },
+                    "thuong_hieu_id": {
+                        "$ref": "#/components/schemas/thuongHieu"
+                    },
+                    "nhac_cung_cap_id": {
+                        "$ref": "#/components/schemas/nhacCungCap"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "thuongHieu": {
+                "title": "thuongHieu",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "AUTO_INCREMENT",
+                        "type": "BIGINT"
+                    },
+                    "ten_hang": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "mo_ta": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    }
+                },
+                "type": "object"
+            },
+            "xuatKho": {
+                "title": "xuatKho",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "AUTO_INCREMENT",
+                        "type": "BIGINT"
+                    },
+                    "ma_phieu_xuat": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "ngay_xuat": {
+                        "description": "",
+                        "type": "DATETIME",
+                        "default": "NULL"
+                    },
+                    "so_luong": {
+                        "description": "",
+                        "type": "VARCHAR",
+                        "default": "NULL"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "TIMESTAMP",
+                        "default": "NULL"
+                    },
+                    "updated_at": {
                         "description": "",
                         "type": "TIMESTAMP",
                         "default": "NULL"

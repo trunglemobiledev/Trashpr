@@ -5,6 +5,15 @@ Vue.use(VueRouter);
 
 import dashboard from './modules/dashboard';
 import administrator from './modules/administrator';
+import sanpham from './modules/sanpham';
+import thuongHieu from './modules/thuong-hieu';
+import danhMuc from './modules/danh-muc';
+import nhacCungCap from './modules/nhac-cung-cap';
+import kho from './modules/kho';
+import nhapKho from './modules/nhap-kho';
+import xuatKho from './modules/xuat-kho';
+import post from './modules/post';
+import comment from './modules/comment';
 // {{$IMPORT_ROUTE_NOT_DELETE_THIS_LINE$}}
 
 /**
@@ -80,7 +89,16 @@ export const constantRouterMap = [
 ];
 
 export const asyncRouterMap = [
-  // {{$ROUTE_ASYNC_NOT_DELETE_THIS_LINE$}},
+  sanpham,
+      thuongHieu,
+      danhMuc,
+      nhacCungCap,
+      kho,
+      nhapKho,
+      xuatKho,
+      post,
+      comment,
+      // {{$ROUTE_ASYNC_NOT_DELETE_THIS_LINE$}},
   administrator,
   { path: '*', redirect: '/404', hidden: true },
 ];
